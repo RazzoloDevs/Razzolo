@@ -4,6 +4,7 @@ import it.unisa.razzolo_debug.model.Point;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Algorithms {
     public static boolean bfs(char[][] matrix, int i, int j, String word){
@@ -27,6 +28,34 @@ public class Algorithms {
                 int deltaY = y + dY[k];
                 if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                     queue.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
+                    isVisited[deltaX][deltaY] = true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean dfs(char[][] matrix, int i, int j, String word){
+        final boolean[][] isVisited = new boolean[4][4];
+
+        final Stack<Point> stack = new Stack<>();
+        stack.push(new Point(i,j, matrix[i][j], 0));
+        isVisited[i][j] = true;
+
+        while(!stack.isEmpty()){
+            final Point point = stack.pop();
+            int currentIndex = point.index();
+            if(currentIndex == word.length()-1)
+                return true;
+
+            int x = point.i();
+            int y = point.j();
+            // check adjacent cells
+            for(int k=0; k<8; k++){
+                int deltaX = x + dX[k];
+                int deltaY = y + dY[k];
+                if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
+                    stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;
                 }
             }

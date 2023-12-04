@@ -20,7 +20,7 @@ public class MyTest {
         {'O','P','Q','R'}
     };
     private Set<String> foundWords = new HashSet<>();
-    private final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA","AFELIO","FELPI","FELPO","POLI","LEI","FLIP","FLOP"));;
+    private final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA","AFELIO","FELPI","FELPO","POLI","LEI","FLIP","FLOP"));
     private final FileInputStream file = LoadFile.getInstance();
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
     private long start;

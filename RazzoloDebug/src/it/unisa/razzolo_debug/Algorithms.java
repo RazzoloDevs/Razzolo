@@ -24,8 +24,8 @@ public class Algorithms {
             int y = point.j();
             // check adjacent cells
             for(int k=0; k<8; k++){
-                int deltaX = x + dX[k];
-                int deltaY = y + dY[k];
+                int deltaX = x + Point.directions[k].x();
+                int deltaY = y + Point.directions[k].y();
                 if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                     queue.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;
@@ -52,8 +52,8 @@ public class Algorithms {
             int y = point.j();
             // check adjacent cells
             for(int k=0; k<8; k++){
-                int deltaX = x + dX[k];
-                int deltaY = y + dY[k];
+                int deltaX = x + Point.directions[k].x();
+                int deltaY = y + Point.directions[k].x();
                 if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                     stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;
@@ -68,9 +68,4 @@ public class Algorithms {
             return !isVisited[i][j];
         return false;
     }
-
-    // all possible directions
-    private static final int[] dX = { 0, 1, 1, 1, 0, -1, -1, -1};
-    private static final int[] dY = { -1, -1, 0, 1, 1, 1, 0, -1};
-                                   //up up-dx dx dw-dx dw dw-sx sx up-sx
 }

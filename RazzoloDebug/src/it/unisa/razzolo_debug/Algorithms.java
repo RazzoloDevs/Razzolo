@@ -23,7 +23,7 @@ public class Algorithms {
             int x = point.i();
             int y = point.j();
             // check adjacent cells
-            for(int k=0; k<8; k++){
+            for(int k=0; k<Point.directions.length; k++){
                 int deltaX = x + Point.directions[k].x();
                 int deltaY = y + Point.directions[k].y();
                 if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
@@ -51,9 +51,9 @@ public class Algorithms {
             int x = point.i();
             int y = point.j();
             // check adjacent cells
-            for(int k=0; k<8; k++){
+            for(int k=0; k<Point.directions.length; k++){
                 int deltaX = x + Point.directions[k].x();
-                int deltaY = y + Point.directions[k].x();
+                int deltaY = y + Point.directions[k].y();
                 if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                     stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;

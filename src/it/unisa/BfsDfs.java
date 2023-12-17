@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class Algorithms {
+public class BfsDfs {
     public static boolean bfs(char[][] matrix, int i, int j, String word){
         final boolean[][] isVisited = new boolean[4][4];
 

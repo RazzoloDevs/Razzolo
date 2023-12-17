@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -33,8 +34,9 @@ public abstract class Configuration {
     }
 
     @AfterEach
-    protected void teardown(){
+    protected void teardown() throws IOException {
         final var end = System.nanoTime();
+        file.getChannel().position(0);
         System.out.format("Found words: %s\n", foundWords);
         System.out.format("Elapsed time: %g s\n", ((double)(end-start))/1000000000);
         for(String s : trueWords)

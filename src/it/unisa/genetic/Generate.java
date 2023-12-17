@@ -5,41 +5,38 @@ import it.unisa.model.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.unisa.Util.checkCells;
+
 // Gli individui sono rappresentati da un array di Point
 public class Generate {
 
     // Genera individui validi
     public static List<Point[]> generate(char[][] matrix){
         final List<Point[]> l = new ArrayList<>();
-        final boolean[][] isVisited = new boolean[4][4];
 
         for(int a=0; a<Common.N_INDIVIDUALS; a++){
+            final boolean[][] isVisited = new boolean[4][4];
+
             int stringSize = Common.random.nextInt(2,7);
             Point[] string = new Point[stringSize];
-            int x = Common.random.nextInt(4);
-            int y = Common.random.nextInt(4);
-            int currentIndex = 0;
-            Point startPoint = new Point(x, y, matrix[x][y], currentIndex);
-            for(int b=1; b<stringSize; b++){
+            final int x = Common.random.nextInt(4);
+            final int y = Common.random.nextInt(4);
+            string[0] = new Point(x, y, matrix[x][y], 0);
+            isVisited[x][y] = true;
+            for(int stringIndex = 1; stringIndex < stringSize; stringIndex++){
                 List<Point> adjacentCells = new ArrayList<>();
                 for(int k=0; k<Point.directions.length; k++) {
-                    int deltaX = x + Point.directions[k].x();
-                    int deltaY = y + Point.directions[k].y();
-                    if(checkCells(isVisited, deltaX, deltaY))
-                        adjacentCells.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY], b));
+                    int deltaI = string[stringIndex-1].i() + Point.directions[k].x();
+                    int deltaJ = string[stringIndex-1].j() + Point.directions[k].y();
+                    if(checkCells(isVisited, deltaI, deltaJ))
+                        adjacentCells.add(new Point(deltaI, deltaJ, matrix[deltaI][deltaJ], stringIndex));
                 }
                 Point p = adjacentCells.get(Common.random.nextInt(adjacentCells.size()));
-                string[b] = p;
+                string[stringIndex] = p;
+                isVisited[string[stringIndex].i()][string[stringIndex].j()] = true;
             }
             l.add(string);
         }
         return l;
     }
-
-    private static boolean checkCells(boolean[][] isVisited, int i, int j){
-        if((i>=0 && i<4) && (j>=0 && j<4))
-            return !isVisited[i][j];
-        return false;
-    }
-
 }

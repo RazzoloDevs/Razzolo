@@ -18,4 +18,11 @@ public record Point(int i, int j, char value, int index) {
         new Direction(-1, 0),   // sx
         new Direction(-1, -1)   // up-sx
     };
+
+    public static String getString(Point[] points){
+        StringBuilder s = new StringBuilder();
+        for(Point p : points)
+            s.append(p.value);
+        return s.toString();
+    }
 }

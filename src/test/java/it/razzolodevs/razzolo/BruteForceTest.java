@@ -1,11 +1,11 @@
-package it.unisa.test;
+package test.java.it.razzolodevs.razzolo;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static it.unisa.bruteforce.Bfs.bfs;
-import static it.unisa.bruteforce.Dfs.dfs;
+import static main.java.it.razzolodevs.razzolo.bruteforce.Bfs.bfs;
+import static main.java.it.razzolodevs.razzolo.bruteforce.Dfs.dfs;
 
 public class BruteForceTest extends Configuration{
 

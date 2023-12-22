@@ -1,4 +1,4 @@
-package it.unisa.genetic;
+package main.java.it.razzolodevs.razzolo.genetic;
 
 public class Mutation {
     // creo nuovi individui sulla base di quelli presenti nella popolazione (MAX: Common.N_INDIVIDUALS)

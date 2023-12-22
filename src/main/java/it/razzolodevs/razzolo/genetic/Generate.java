@@ -1,11 +1,10 @@
-package it.unisa.genetic;
+package main.java.it.razzolodevs.razzolo.genetic;
 
-import it.unisa.model.Point;
+import main.java.it.razzolodevs.razzolo.model.Point;
+import main.java.it.razzolodevs.razzolo.Util;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static it.unisa.Util.checkCells;
 
 // Gli individui sono rappresentati da un array di Point
 public class Generate {
@@ -28,7 +27,7 @@ public class Generate {
                 for(int k=0; k<Point.directions.length; k++) {
                     int deltaI = string[stringIndex-1].i() + Point.directions[k].x();
                     int deltaJ = string[stringIndex-1].j() + Point.directions[k].y();
-                    if(checkCells(isVisited, deltaI, deltaJ))
+                    if(Util.checkCells(isVisited, deltaI, deltaJ))
                         adjacentCells.add(new Point(deltaI, deltaJ, matrix[deltaI][deltaJ], stringIndex));
                 }
                 Point p = adjacentCells.get(Common.random.nextInt(adjacentCells.size()));

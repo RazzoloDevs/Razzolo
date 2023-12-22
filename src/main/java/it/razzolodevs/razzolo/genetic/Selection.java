@@ -1,6 +1,6 @@
-package it.unisa.genetic;
+package main.java.it.razzolodevs.razzolo.genetic;
 
-import it.unisa.model.Point;
+import main.java.it.razzolodevs.razzolo.model.Point;
 
 import java.util.List;
 

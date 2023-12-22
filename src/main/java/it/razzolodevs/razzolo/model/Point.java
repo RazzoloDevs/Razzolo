@@ -1,4 +1,4 @@
-package it.unisa.model;
+package main.java.it.razzolodevs.razzolo.model;
 
 /**
  * @param i indice riga matrice

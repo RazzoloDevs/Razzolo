@@ -1,4 +1,4 @@
-package it.unisa.genetic;
+package main.java.it.razzolodevs.razzolo.genetic;
 
 import java.util.Random;
 

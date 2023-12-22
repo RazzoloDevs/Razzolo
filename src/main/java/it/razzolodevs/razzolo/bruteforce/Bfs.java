@@ -1,10 +1,10 @@
-package it.unisa.bruteforce;
+package main.java.it.razzolodevs.razzolo.bruteforce;
 
-import it.unisa.model.Point;
+import main.java.it.razzolodevs.razzolo.model.Point;
+import main.java.it.razzolodevs.razzolo.Util;
+
 import java.util.LinkedList;
 import java.util.Queue;
-
-import static it.unisa.Util.checkCells;
 
 public class Bfs {
     public static boolean bfs(char[][] matrix, String word){
@@ -31,7 +31,7 @@ public class Bfs {
                     for(int k=0; k<Point.directions.length; k++){
                         int deltaX = x + Point.directions[k].x();
                         int deltaY = y + Point.directions[k].y();
-                        if(checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
+                        if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                             queue.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                             isVisited[deltaX][deltaY] = true;
                         }

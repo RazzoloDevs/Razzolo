@@ -1,7 +1,7 @@
-package it.unisa.genetic;
+package main.java.it.razzolodevs.razzolo.genetic;
 
-import it.unisa.LoadFile;
-import it.unisa.model.Point;
+import main.java.it.razzolodevs.razzolo.LoadFile;
+import main.java.it.razzolodevs.razzolo.model.Point;
 
 import java.io.BufferedReader;
 import java.io.IOException;

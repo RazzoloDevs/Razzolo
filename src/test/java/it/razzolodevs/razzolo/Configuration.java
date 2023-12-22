@@ -1,6 +1,6 @@
-package it.unisa.test;
+package test.java.it.razzolodevs.razzolo;
 
-import it.unisa.LoadFile;
+import main.java.it.razzolodevs.razzolo.LoadFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 

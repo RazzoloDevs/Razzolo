@@ -1,15 +1,13 @@
-package it.unisa.test;
+package test.java.it.razzolodevs.razzolo;
 
-import it.unisa.genetic.Generate;
-import it.unisa.model.Point;
+import main.java.it.razzolodevs.razzolo.genetic.Generate;
+import main.java.it.razzolodevs.razzolo.model.Point;
+import main.java.it.razzolodevs.razzolo.bruteforce.Bfs;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static it.unisa.bruteforce.Bfs.bfs;
-import static it.unisa.model.Point.getString;
 
 public class GeneticTest{
     protected final char[][] matrix = {
@@ -25,8 +23,8 @@ public class GeneticTest{
         List<String> errorList = new ArrayList<>();
         final var l = Generate.generate(matrix);
         for(Point[] p : l){
-            String s  = getString(p);
-            if(!bfs(matrix, s))
+            String s  = Point.getString(p);
+            if(!Bfs.bfs(matrix, s))
                 errorList.add(s);
         }
         System.out.println("Parole non trovate: " + errorList);

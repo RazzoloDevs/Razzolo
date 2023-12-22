@@ -1,5 +1,6 @@
 package main.java.it.razzolodevs.razzolo.genetic;
 
+import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 import main.java.it.razzolodevs.razzolo.Util;
 
@@ -24,9 +25,9 @@ public class Generate {
             isVisited[x][y] = true;
             for(int stringIndex = 1; stringIndex < stringSize; stringIndex++){
                 List<Point> adjacentCells = new ArrayList<>();
-                for(int k=0; k<Point.directions.length; k++) {
-                    int deltaI = string[stringIndex-1].i() + Point.directions[k].x();
-                    int deltaJ = string[stringIndex-1].j() + Point.directions[k].y();
+                for(int k = 0; k< Direction.DIRECTIONS.length; k++) {
+                    int deltaI = string[stringIndex-1].i() + Direction.DIRECTIONS[k].x();
+                    int deltaJ = string[stringIndex-1].j() + Direction.DIRECTIONS[k].y();
                     if(Util.checkCells(isVisited, deltaI, deltaJ))
                         adjacentCells.add(new Point(deltaI, deltaJ, matrix[deltaI][deltaJ], stringIndex));
                 }

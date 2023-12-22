@@ -1,2 +1,2 @@
 # Razzolo
-A ruzzle resolver
+A [Ruzzle](https://wikipedia.org/wiki/Ruzzle) resolver.

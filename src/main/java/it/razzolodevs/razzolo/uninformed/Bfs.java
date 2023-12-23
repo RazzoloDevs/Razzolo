@@ -1,4 +1,4 @@
-package main.java.it.razzolodevs.razzolo.bruteforce;
+package main.java.it.razzolodevs.razzolo.uninformed;
 
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;

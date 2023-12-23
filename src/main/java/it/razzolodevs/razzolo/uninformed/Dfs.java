@@ -1,4 +1,4 @@
-package main.java.it.razzolodevs.razzolo.bruteforce;
+package main.java.it.razzolodevs.razzolo.uninformed;
 
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
@@ -19,19 +19,20 @@ public class Dfs {
                 stack.push(new Point(i,j, matrix[i][j], 0));
                 isVisited[i][j] = true;
 
+                // non funziona
                 while(!stack.isEmpty()){
                     final Point point = stack.pop();
                     int currentIndex = point.index();
-                    if(currentIndex == word.length()-1)
-                        return true;
 
                     int x = point.i();
                     int y = point.j();
+                    System.out.println(matrix[x][y]);
+
                     // check adjacent cells
-                    for(int k = 0; k< Direction.DIRECTIONS.length; k++){
+                    for(int k = 0; k < Direction.DIRECTIONS.length; k++){
                         int deltaX = x + Direction.DIRECTIONS[k].x();
                         int deltaY = y + Direction.DIRECTIONS[k].y();
-                        if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
+                        if(Util.checkCells(isVisited, deltaX, deltaY)){
                             stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                             isVisited[deltaX][deltaY] = true;
                         }

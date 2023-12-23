@@ -8,7 +8,7 @@ import static main.java.it.razzolodevs.razzolo.uninformed.Bfs.bfs;
 import static main.java.it.razzolodevs.razzolo.uninformed.Dfs.dfs;
 import static main.java.it.razzolodevs.razzolo.uninformed.IterativeDeepening.iterativeDeepening;
 
-public class UninformedTest extends Configuration{
+public class UninformedTest extends UninformedConfiguration {
 
     @Test
     public void bfsTest() throws IOException {

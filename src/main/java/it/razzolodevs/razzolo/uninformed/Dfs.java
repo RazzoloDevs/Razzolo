@@ -2,44 +2,49 @@ package main.java.it.razzolodevs.razzolo.uninformed;
 
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
-import main.java.it.razzolodevs.razzolo.Util;
+import main.java.it.razzolodevs.razzolo.model.trie.Trie;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Dfs {
-    public static boolean dfs(char[][] matrix, String word){
-        for(int i=0;i<4;i++){
-            for(int j=0;j<4;j++){
-                if(word.charAt(0) != matrix[i][j])
-                    continue;
+    private final char[][] matrix;
+    private final Trie trie;
 
-                final boolean[][] isVisited = new boolean[4][4];
+    public Dfs(char[][] matrix) throws IOException {
+        this.matrix = matrix;
+        this.trie = new Trie();
+    }
 
-                final Stack<Point> stack = new Stack<>();
-                stack.push(new Point(i,j, matrix[i][j], 0));
-                isVisited[i][j] = true;
+    public List<String> dfs(int i, int j){
+        final var l = new ArrayList<String>();
 
-                // non funziona
-                while(!stack.isEmpty()){
-                    final Point point = stack.pop();
-                    int currentIndex = point.index();
+        final Stack<Point> stack = new Stack<>();
+        stack.push(new Point(i, j, String.valueOf(matrix[i][j]), 0));
 
-                    int x = point.i();
-                    int y = point.j();
-                    System.out.println(matrix[x][y]);
+        while(!stack.isEmpty()){
+            final Point point = stack.pop();
+            int currentIndex = point.getIndex();
+            String s = point.getString();
+            if(trie.search(s))
+                l.add(s);
 
-                    // check adjacent cells
-                    for(int k = 0; k < Direction.DIRECTIONS.length; k++){
-                        int deltaX = x + Direction.DIRECTIONS[k].x();
-                        int deltaY = y + Direction.DIRECTIONS[k].y();
-                        if(Util.checkCells(isVisited, deltaX, deltaY)){
-                            stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
-                            isVisited[deltaX][deltaY] = true;
-                        }
-                    }
+            int x = point.getI();
+            int y = point.getJ();
+
+            // check adjacent cells
+            for(int k = 0; k < Direction.DIRECTIONS.length; k++){
+                int deltaX = x + Direction.DIRECTIONS[k].x();
+                int deltaY = y + Direction.DIRECTIONS[k].y();
+                if((deltaX >= 0 && deltaX < 4) && (deltaY >= 0 && deltaY < 4)){
+                    char c = matrix[deltaX][deltaY];
+                    if(s.indexOf(c) < 0)
+                        stack.push(new Point(deltaX, deltaY, s + c, currentIndex + 1));
                 }
             }
         }
-        return false;
+        return l;
     }
 }

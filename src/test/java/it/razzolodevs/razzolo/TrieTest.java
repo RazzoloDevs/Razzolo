@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -12,18 +11,19 @@ public class TrieTest extends TrieConfiguration{
 
     @Test
     public void buildTrie() throws IOException{
-        final var l = new ArrayList<String>();
+        boolean flag = true;
+        int count = 0;
+        file.getChannel().position(0);
         while(bufferedReader.ready()){
-            String line = bufferedReader.readLine();
-            l.add(line);
-            trie.insert(line);
+            final String line = bufferedReader.readLine();
+            if(trie.search(line))
+                count++;
+            else
+                flag = false;
         }
 
-        for(String s : l)
-            if(!trie.search(s))
-                System.out.println(s + " non trovata");
-
-        Assertions.assertEquals(661563, l.size());
+        Assertions.assertEquals(661563, count);
+        Assertions.assertTrue(flag);
     }
 
     @Test
@@ -33,6 +33,5 @@ public class TrieTest extends TrieConfiguration{
 
         Assertions.assertEquals(new HashSet<>(Arrays.asList('C', 'D', 'L', 'R', 'S', 'T', 'V', 'Z')), trie.searchBySubstring("ABA"));
         Assertions.assertEquals(new HashSet<>(Arrays.asList('A', 'E', 'N', 'O')), trie.searchBySubstring("ABBACCHI"));
-
     }
 }

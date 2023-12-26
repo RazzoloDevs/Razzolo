@@ -26,14 +26,14 @@ public class Generate {
             for(int stringIndex = 1; stringIndex < stringSize; stringIndex++){
                 List<Point> adjacentCells = new ArrayList<>();
                 for(int k = 0; k< Direction.DIRECTIONS.length; k++) {
-                    int deltaI = string[stringIndex-1].i() + Direction.DIRECTIONS[k].x();
-                    int deltaJ = string[stringIndex-1].j() + Direction.DIRECTIONS[k].y();
+                    int deltaI = string[stringIndex-1].getI() + Direction.DIRECTIONS[k].x();
+                    int deltaJ = string[stringIndex-1].getJ() + Direction.DIRECTIONS[k].y();
                     if(Util.checkCells(isVisited, deltaI, deltaJ))
                         adjacentCells.add(new Point(deltaI, deltaJ, matrix[deltaI][deltaJ], stringIndex));
                 }
                 Point p = adjacentCells.get(Common.random.nextInt(adjacentCells.size()));
                 string[stringIndex] = p;
-                isVisited[string[stringIndex].i()][string[stringIndex].j()] = true;
+                isVisited[string[stringIndex].getI()][string[stringIndex].getJ()] = true;
             }
             l.add(string);
         }

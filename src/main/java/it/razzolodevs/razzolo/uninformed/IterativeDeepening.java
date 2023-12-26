@@ -17,12 +17,12 @@ public class IterativeDeepening {
         boolean flag = true;
         while(flag){
             flag = false;
-            int currentIndex = point.index();
+            int currentIndex = point.getIndex();
             if(currentIndex == word.length()-1)
                 return true;
 
-            int x = point.i();
-            int y = point.j();
+            int x = point.getI();
+            int y = point.getJ();
             // check adjacent cells
             for(int k = 0; k< Direction.DIRECTIONS.length; k++){
                 int deltaX = x + Direction.DIRECTIONS[k].x();

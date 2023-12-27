@@ -1,4 +1,4 @@
-package main.java.it.razzolodevs.razzolo.model.trie;
+package main.java.it.razzolodevs.razzolo.model;
 
 import main.java.it.razzolodevs.razzolo.LoadFile;
 
@@ -72,30 +72,33 @@ public class Trie {
         while(bufferedReader.ready()){
             this.insert(bufferedReader.readLine());
         }
-        /*
-        BufferedReader bufferedReader = null;
-        String s;
-        final var file = LoadFile.getInstance();
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
-            while((s = bufferedReader.readLine()) != null)
-                this.insert(s);
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+    }
+
+    private static class TrieNode {
+        private char val;
+        private HashMap<Character, TrieNode> children = new HashMap<>();
+        private boolean isLeaf;
+
+        public TrieNode(){}
+        public TrieNode(char c){
+            this.val = c;
         }
-        try {
-            file.getChannel().position(0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+        public HashMap<Character, TrieNode> getChildren() {
+            return children;
         }
-        */
+
+        public void setChildren(HashMap<Character, TrieNode> children) {
+            this.children = children;
+        }
+
+        public boolean isLeaf() {
+            return isLeaf;
+        }
+
+        public void setLeaf(boolean isLeaf) {
+            this.isLeaf = isLeaf;
+        }
+
     }
 }

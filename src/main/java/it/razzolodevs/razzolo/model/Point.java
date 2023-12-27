@@ -24,20 +24,6 @@ public class Point {
         this.value = ' ';
     }
 
-    public static String getString(Point[] points){
-        StringBuilder s = new StringBuilder();
-        for(Point p : points)
-            s.append(p.value);
-        return s.toString();
-    }
-
-    public static Point[] stringToPoint(final String s){
-        final Point[] p = new Point[s.length()];
-        for(int i=0;i<s.length();i++)
-            p[i] = new Point(-1, -1, s.charAt(i), i);
-        return p;
-    }
-
     public int getI() {
         return i;
     }

@@ -5,7 +5,13 @@ import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
 public class IterativeDeepening {
-    public static boolean iterativeDeepening(char[][] matrix, String word, int i, int j){
+    private final char[][] matrix;
+
+    public IterativeDeepening(final char[][] matrix){
+        this.matrix = matrix;
+    }
+
+    public boolean iterativeDeepening(String word, int i, int j){
         if(word.charAt(0) != matrix[i][j])
             return false;
 
@@ -28,7 +34,7 @@ public class IterativeDeepening {
                 int deltaX = x + Direction.DIRECTIONS[k].x();
                 int deltaY = y + Direction.DIRECTIONS[k].y();
                 if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
-                    point = new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1);
+                    point = new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex + 1);
                     isVisited[deltaX][deltaY] = true;
                     flag = true;
                 }

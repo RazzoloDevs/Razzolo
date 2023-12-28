@@ -2,42 +2,38 @@ package test.java.it.razzolodevs.razzolo;
 
 import main.java.it.razzolodevs.razzolo.uninformed.Bfs;
 import main.java.it.razzolodevs.razzolo.uninformed.Dfs;
+import main.java.it.razzolodevs.razzolo.uninformed.IterativeDeepening;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
-import static main.java.it.razzolodevs.razzolo.uninformed.IterativeDeepening.iterativeDeepening;
 
 public class UninformedTest extends UninformedConfiguration {
 
     @Test
-    public void bfsTest() throws IOException {
+    public void bfsTest() {
         System.out.println("Bfs:");
-        final Bfs bfs = new Bfs(matrix);
+        final var bfs = new Bfs(matrix, dictionary);
         for(int i = 0; i < matrix.length; i++)
             for(int j = 0; j < matrix[i].length; j++)
                 foundWords.addAll(bfs.bfs(i, j));
     }
 
     @Test
-    public void dfsTest() throws IOException {
+    public void dfsTest() {
         System.out.println("Dfs:");
-        final Dfs dfs = new Dfs(matrix);
+        final var dfs = new Dfs(matrix, dictionary);
         for(int i = 0; i < matrix.length; i++)
             for(int j = 0; j < matrix[i].length; j++)
                 foundWords.addAll(dfs.dfs(i, j));
     }
 
     @Test
-    public void IterativeDeepening() throws IOException {
+    public void IterativeDeepening() {
         System.out.println("Iterative Deepening:");
-        while(bufferedReader.ready()) {
-            String line = bufferedReader.readLine();
+        final var iterativeDeepening =  new IterativeDeepening(matrix);
+        for(final String s : dictionary)
             for(int i = 0; i < matrix.length; i++)
                 for(int j = 0; j < matrix[i].length; j++)
-                    if (iterativeDeepening(matrix, line, i, j))
-                        foundWords.add(line);
-        }
+                    if (iterativeDeepening.iterativeDeepening(s, i, j))
+                        foundWords.add(s);
     }
 }
 

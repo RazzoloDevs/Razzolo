@@ -2,7 +2,6 @@ package test.java.it.razzolodevs.razzolo;
 
 import main.java.it.razzolodevs.razzolo.LoadFile;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,6 +18,5 @@ public abstract class Configuration {
     protected Set<String> foundWords;
     protected final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA", "AFELIO", "FELPI", "FELPO", "POLI", "LEI", "FLIP", "FLOP"));
     protected final FileInputStream file = LoadFile.getInstance();
-    protected BufferedReader bufferedReader;
     protected long start;
 }

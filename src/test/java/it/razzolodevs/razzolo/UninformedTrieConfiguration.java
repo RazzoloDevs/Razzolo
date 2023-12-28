@@ -1,21 +1,19 @@
 package test.java.it.razzolodevs.razzolo;
 
+import main.java.it.razzolodevs.razzolo.model.Trie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 
-public abstract class UninformedConfiguration extends Configuration {
-    protected HashSet<String> dictionary;
+public abstract class UninformedTrieConfiguration extends Configuration {
+    protected Trie trie;
 
     @BeforeEach
     protected void init() throws IOException {
+        trie = new Trie();
         foundWords = new HashSet<>();
-        _buildDictionary();
         start = System.nanoTime();
     }
 
@@ -27,13 +25,5 @@ public abstract class UninformedConfiguration extends Configuration {
         for(String s : trueWords)
             if(!foundWords.contains(s))
                 System.out.format("%s not found\n",s);
-    }
-
-    private void _buildDictionary() throws IOException{
-        dictionary = new HashSet<>();
-        file.getChannel().position(0);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
-        while(bufferedReader.ready())
-            dictionary.add(bufferedReader.readLine());
     }
 }

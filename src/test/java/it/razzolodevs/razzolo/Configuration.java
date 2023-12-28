@@ -1,6 +1,6 @@
 package test.java.it.razzolodevs.razzolo;
 
-import main.java.it.razzolodevs.razzolo.LoadFile;
+import main.java.it.razzolodevs.razzolo.Dictionary;
 
 import java.io.FileInputStream;
 import java.util.Arrays;
@@ -17,6 +17,6 @@ public abstract class Configuration {
 
     protected Set<String> foundWords;
     protected final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA", "AFELIO", "FELPI", "FELPO", "POLI", "LEI", "FLIP", "FLOP"));
-    protected final FileInputStream file = LoadFile.getInstance();
+    protected final FileInputStream file = Dictionary.getInstance();
     protected long start;
 }

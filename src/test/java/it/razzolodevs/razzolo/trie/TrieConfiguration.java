@@ -1,6 +1,6 @@
 package test.java.it.razzolodevs.razzolo.trie;
 
-import main.java.it.razzolodevs.razzolo.LoadFile;
+import main.java.it.razzolodevs.razzolo.Dictionary;
 import main.java.it.razzolodevs.razzolo.model.Trie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ public abstract class TrieConfiguration {
     @BeforeEach
     protected void init() throws IOException {
         trie = new Trie();
-        FileInputStream file = LoadFile.getInstance();
+        FileInputStream file = Dictionary.getInstance();
         file.getChannel().position(0);
         bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
     }

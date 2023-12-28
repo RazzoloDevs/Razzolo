@@ -3,7 +3,7 @@ package main.java.it.razzolodevs.razzolo.uninformed;
 import java.util.*;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class Container<T>
+public class Container<T, E>
 {
     private final ContainerType type;
     private final T instance;
@@ -35,7 +35,7 @@ public class Container<T>
         };
     }
 
-    public void add(Object item)
+    public void add(E item)
     {
         switch (this.type)
         {
@@ -44,12 +44,12 @@ public class Container<T>
         }
     }
 
-    public Object remove()
+    public E remove()
     {
         return switch (this.type)
         {
-            case ContainerType.STACK -> ((Stack)this.instance).pop();
-            case ContainerType.QUEUE -> ((Queue)this.instance).remove();
+            case ContainerType.STACK -> (E)((Stack)this.instance).pop();
+            case ContainerType.QUEUE -> (E)((Queue)this.instance).remove();
         };
     }
 }

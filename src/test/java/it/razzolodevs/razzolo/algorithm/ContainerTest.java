@@ -15,24 +15,24 @@ public class ContainerTest
     @Test
     public void stackContainerTest()
     {
-        final var container = new Container(new Stack<>());
+        final var container = new Container<Stack, Point>(new Stack());
 
         _fillContainer(container);
         assertFalse(container.isEmpty());
 
-        var e = (Point)container.remove();
+        final var e = container.remove();
         assertEquals(2, e.getI());
     }
 
     @Test
     public void queueContainerTest()
     {
-        final var container = new Container(new LinkedList<>());
+        final var container = new Container<LinkedList, Point>(new LinkedList<>());
 
         _fillContainer(container);
         assertFalse(container.isEmpty());
 
-        var e = (Point)container.remove();
+        final var e = container.remove();
         assertEquals(0, e.getI());
     }
 

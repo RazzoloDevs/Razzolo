@@ -68,6 +68,7 @@ public class Trie {
 
     private void _buildTrie() throws IOException {
         final var file = LoadFile.getInstance();
+        file.getChannel().position(0);
         final var bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
         while(bufferedReader.ready()){
             this.insert(bufferedReader.readLine());

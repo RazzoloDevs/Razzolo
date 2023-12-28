@@ -1,4 +1,4 @@
-package test.java.it.razzolodevs.razzolo;
+package test.java.it.razzolodevs.razzolo.trie;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,12 +8,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class TrieTest extends TrieConfiguration{
-
     @Test
     public void buildTrie() throws IOException{
+
         boolean flag = true;
         int count = 0;
-        file.getChannel().position(0);
         while(bufferedReader.ready()){
             final String line = bufferedReader.readLine();
             if(trie.search(line))

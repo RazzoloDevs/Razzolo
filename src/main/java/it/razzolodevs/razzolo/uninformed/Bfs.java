@@ -2,18 +2,17 @@ package main.java.it.razzolodevs.razzolo.uninformed;
 
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
-import main.java.it.razzolodevs.razzolo.model.trie.Trie;
 
-import java.io.IOException;
 import java.util.*;
 
 public class Bfs {
-    private final char[][] matrix;
-    private final Trie trie;
 
-    public Bfs(char[][] matrix) throws IOException {
+    private final char[][] matrix;
+    private final HashSet<String> dictionary;
+
+    public Bfs(final char[][] matrix, final HashSet<String> dictionary) {
         this.matrix = matrix;
-        this.trie = new Trie();
+        this.dictionary = dictionary;
     }
 
     public List<String> bfs(int i, int j){
@@ -26,7 +25,7 @@ public class Bfs {
             final Point point = queue.poll();
             int currentIndex = point.getIndex();
             String s = point.getString();
-            if(trie.search(s))
+            if(dictionary.contains(s))
                 l.add(s);
 
             int x = point.getI();
@@ -36,7 +35,7 @@ public class Bfs {
             for(int k = 0; k < Direction.DIRECTIONS.length; k++){
                 int deltaX = x + Direction.DIRECTIONS[k].x();
                 int deltaY = y + Direction.DIRECTIONS[k].y();
-                if((deltaX >= 0 && deltaX < 4) && (deltaY >= 0 && deltaY < 4)){
+                if((deltaX >= 0 && deltaX < matrix.length) && (deltaY >= 0 && deltaY < matrix[0].length)){
                     char c = matrix[deltaX][deltaY];
                     if(s.indexOf(c) < 0)
                         queue.add(new Point(deltaX, deltaY, s + c, currentIndex + 1));

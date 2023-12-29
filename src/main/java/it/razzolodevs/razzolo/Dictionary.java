@@ -1,7 +1,7 @@
 package main.java.it.razzolodevs.razzolo;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
 
 public class Dictionary
 {
@@ -12,7 +12,7 @@ public class Dictionary
 
         try
         {
-            file = new FileInputStream(url.getFile());
+            file = new RandomAccessFile(url.getFile(), "r");
         }
         catch (FileNotFoundException e)
         {
@@ -20,12 +20,12 @@ public class Dictionary
         }
     }
 
-    public static FileInputStream getInstance()
+    public static RandomAccessFile getInstance()
     {
         if (file == null)
             new Dictionary();
         return file;
     }
 
-    private static FileInputStream file = null;
+    private static RandomAccessFile file = null;
 }

@@ -2,25 +2,30 @@ package main.java.it.razzolodevs.razzolo.model;
 
 import main.java.it.razzolodevs.razzolo.Dictionary;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Set;
 
 public class Trie
 {
     private final TrieNode root;
+    private static Trie trie;
 
-    public Trie() throws IOException
+    private Trie()
     {
         this.root = new TrieNode();
 
         _buildTrie();
     }
 
-    public void insert(String word)
+    public static Trie getInstance()
+    {
+        if(trie == null)
+            trie = new Trie();
+        return trie;
+    }
+
+    private void _insert(String word)
     {
         var children = root.getChildren();
         var node = new TrieNode();
@@ -78,16 +83,19 @@ public class Trie
         return children.keySet();
     }
 
-    private void _buildTrie() throws IOException
+    private void _buildTrie()
     {
-        final var file = Dictionary.getInstance();
-        try (final var channel = file.getChannel())
-        {
-            channel.position(0);
-
-            final var bufferedReader = new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
-            while (bufferedReader.ready())
-                this.insert(bufferedReader.readLine());
+        final RandomAccessFile randomAccessFile = Dictionary.getInstance();
+        final BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(randomAccessFile.getFD()));
+            randomAccessFile.seek(0);
+            while(bufferedReader.ready()){
+                final String s = bufferedReader.readLine();
+                this._insert(s);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

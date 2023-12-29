@@ -4,15 +4,14 @@ import main.java.it.razzolodevs.razzolo.model.Trie;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.io.IOException;
 import java.util.HashSet;
 
 public abstract class UninformedTrieConfiguration extends Configuration {
     protected Trie trie;
 
     @BeforeEach
-    protected void init() throws IOException {
-        trie = new Trie();
+    protected void init() {
+        trie = Trie.getInstance();
         foundWords = new HashSet<>();
         start = System.nanoTime();
     }

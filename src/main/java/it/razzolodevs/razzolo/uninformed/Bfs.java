@@ -1,5 +1,6 @@
 package main.java.it.razzolodevs.razzolo.uninformed;
 
+import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
@@ -18,13 +19,15 @@ public class Bfs {
     public List<String> bfs(int i, int j){
         final var l = new ArrayList<String>();
 
-        final Queue<Point> queue = new LinkedList<>();
-        queue.add(new Point(i, j, String.valueOf(matrix[i][j]), 0));
+        final Queue<ArrayList<Point>> queue = new LinkedList<>();
+        final var tmp = new ArrayList<Point>();
+        tmp.add(new Point(i, j, matrix[i][j]));
+        queue.add(tmp);
 
         while(!queue.isEmpty()){
-            final Point point = queue.poll();
-            int currentIndex = point.getIndex();
-            String s = point.getString();
+            final ArrayList<Point> pointList = queue.poll();
+            final Point point = pointList.getLast();
+            final String s = Util.getString(pointList);
             if(dictionary.contains(s))
                 l.add(s);
 
@@ -35,10 +38,10 @@ public class Bfs {
             for(int k = 0; k < Direction.DIRECTIONS.length; k++){
                 int deltaX = x + Direction.DIRECTIONS[k].x();
                 int deltaY = y + Direction.DIRECTIONS[k].y();
-                if((deltaX >= 0 && deltaX < matrix.length) && (deltaY >= 0 && deltaY < matrix[0].length)){
-                    char c = matrix[deltaX][deltaY];
-                    if(s.indexOf(c) < 0)
-                        queue.add(new Point(deltaX, deltaY, s + c, currentIndex + 1));
+                if(Util.checkCells(deltaX, deltaY, pointList)) {
+                    final var tmpList = new ArrayList<>(pointList);
+                    tmpList.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY]));
+                    queue.add(tmpList);
                 }
             }
         }

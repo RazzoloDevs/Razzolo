@@ -1,5 +1,6 @@
 package main.java.it.razzolodevs.razzolo.uninformed;
 
+import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
@@ -20,13 +21,15 @@ public class Dfs {
     public List<String> dfs(int i, int j){
         final var l = new ArrayList<String>();
 
-        final Stack<Point> stack = new Stack<>();
-        stack.push(new Point(i, j, String.valueOf(matrix[i][j]), 0));
+        final var stack = new Stack<ArrayList<Point>>();
+        final var tmp = new ArrayList<Point>();
+        tmp.add(new Point(i, j, matrix[i][j]));
+        stack.add(tmp);
 
         while(!stack.isEmpty()){
-            final Point point = stack.pop();
-            int currentIndex = point.getIndex();
-            String s = point.getString();
+            final ArrayList<Point> pointList = stack.pop();
+            final Point point = pointList.getLast();
+            final String s = Util.getString(pointList);
             if(dictionary.contains(s))
                 l.add(s);
 
@@ -37,10 +40,10 @@ public class Dfs {
             for(int k = 0; k < Direction.DIRECTIONS.length; k++){
                 int deltaX = x + Direction.DIRECTIONS[k].x();
                 int deltaY = y + Direction.DIRECTIONS[k].y();
-                if((deltaX >= 0 && deltaX < matrix.length) && (deltaY >= 0 && deltaY < matrix[0].length)){
-                    char c = matrix[deltaX][deltaY];
-                    if(s.indexOf(c) < 0)
-                        stack.push(new Point(deltaX, deltaY, s + c, currentIndex + 1));
+                if(Util.checkCells(deltaX, deltaY, pointList)) {
+                    final var tmpList = new ArrayList<>(pointList);
+                    tmpList.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY]));
+                    stack.add(tmpList);
                 }
             }
         }

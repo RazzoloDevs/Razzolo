@@ -1,9 +1,38 @@
 package main.java.it.razzolodevs.razzolo;
 
+import main.java.it.razzolodevs.razzolo.model.Point;
+
+import java.util.ArrayList;
+
 public class Util {
+    // controlla che una coordinata sia valida
+    public static boolean checkCells(int i, int j){
+        return (i >= 0 && i < 4) && (j >= 0 && j < 4);
+    }
+
+    // controlla che una coordinata sia valida e che non sia già stata visitata
     public static boolean checkCells(boolean[][] isVisited, int i, int j){
-        if((i>=0 && i<4) && (j>=0 && j<4))
-            return !isVisited[i][j];
-        return false;
+        return checkCells(i, j) && !isVisited[i][j];
+    }
+
+    // controlla che una coordinata sia valida e che non sia già stata visitata
+    public static boolean checkCells(int i, int j, ArrayList<Point> l){
+        return (checkCells(i, j) && _checkVisited(i, j, l));
+    }
+
+    // controlla che una coordinata non sia già presente nella lista di punti
+    private static boolean _checkVisited(int i, int j, ArrayList<Point> l){
+        for(int k = 0; k < l.size() - 1; k++)
+            if(l.get(k).getI() == i && l.get(k).getJ() == j)
+                return false;
+        return true;
+    }
+
+    // restituisce una stringa a partire da una lista di punti
+    public static String getString(final ArrayList<Point> l){
+        final var sb = new StringBuilder();
+        for(final Point p : l)
+            sb.append(p.getValue());
+        return sb.toString();
     }
 }

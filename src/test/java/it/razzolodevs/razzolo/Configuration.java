@@ -10,7 +10,7 @@ public abstract class Configuration {
     protected final char[][] matrix = {
             {'A', 'B', 'C', 'D'},
             {'E', 'F', 'G', 'H'},
-            {'I', 'M', 'M', 'N'},
+            {'I', 'L', 'M', 'N'},
             {'O', 'P', 'Q', 'R'}
     };
 

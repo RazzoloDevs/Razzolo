@@ -4,10 +4,7 @@ import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Dfs {
     private final char[][] matrix;
@@ -18,8 +15,8 @@ public class Dfs {
         this.dictionary = dictionary;
     }
 
-    public List<String> dfs(int i, int j){
-        final var l = new ArrayList<String>();
+    public HashMap<String, ArrayList<Point>> dfs(int i, int j){
+        final var l = new HashMap<String, ArrayList<Point>>();
 
         final var stack = new Stack<ArrayList<Point>>();
         final var tmp = new ArrayList<Point>();
@@ -31,7 +28,7 @@ public class Dfs {
             final Point point = pointList.getLast();
             final String s = Util.getString(pointList);
             if(dictionary.contains(s))
-                l.add(s);
+                l.put(s, pointList);
 
             int x = point.getI();
             int y = point.getJ();

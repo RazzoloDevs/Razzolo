@@ -16,8 +16,8 @@ public class BfsTrie {
         this.trie = trie;
     }
 
-    public List<String> bfs(int i, int j){
-        final var l = new ArrayList<String>();
+    public HashMap<String, ArrayList<Point>> bfs(int i, int j){
+        final var l = new HashMap<String, ArrayList<Point>>();
 
         final Queue<ArrayList<Point>> queue = new LinkedList<>();
         final var tmp = new ArrayList<Point>();
@@ -29,7 +29,7 @@ public class BfsTrie {
             final Point point = pointList.getLast();
             final String s = Util.getString(pointList);
             if(trie.search(s))
-                l.add(s);
+                l.put(s, pointList);
 
             int x = point.getI();
             int y = point.getJ();

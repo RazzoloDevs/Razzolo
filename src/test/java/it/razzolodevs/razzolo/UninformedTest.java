@@ -13,7 +13,7 @@ public class UninformedTest extends UninformedConfiguration {
         final var bfs = new Bfs(matrix, dictionary);
         for(int i = 0; i < matrix.length; i++)
             for(int j = 0; j < matrix[i].length; j++)
-                foundWords.addAll(bfs.bfs(i, j));
+                foundWords.addAll(bfs.bfs(i, j).keySet());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class UninformedTest extends UninformedConfiguration {
         final var dfs = new Dfs(matrix, dictionary);
         for(int i = 0; i < matrix.length; i++)
             for(int j = 0; j < matrix[i].length; j++)
-                foundWords.addAll(dfs.dfs(i, j));
+                foundWords.addAll(dfs.dfs(i, j).keySet());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class UninformedTest extends UninformedConfiguration {
         for(final String s : dictionary)
             for(int i = 0; i < matrix.length; i++)
                 for(int j = 0; j < matrix[i].length; j++)
-                    if (iterativeDeepening.iterativeDeepening(s, i, j))
+                    if (iterativeDeepening.iterativeDeepening(s, i, j) != null)
                         foundWords.add(s);
     }
 }

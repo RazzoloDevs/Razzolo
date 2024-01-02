@@ -16,8 +16,8 @@ public class DfsTrie {
         this.trie = trie;
     }
 
-    public List<String> dfs(int i, int j){
-        final var l = new ArrayList<String>();
+    public HashMap<String, ArrayList<Point>> dfs(int i, int j){
+        final var l = new HashMap<String, ArrayList<Point>>();
 
         final var stack = new Stack<ArrayList<Point>>();
         final var tmp = new ArrayList<Point>();
@@ -29,7 +29,7 @@ public class DfsTrie {
             final Point point = pointList.getLast();
             final String s = Util.getString(pointList);
             if(trie.search(s))
-                l.add(s);
+                l.put(s, pointList);
 
             int x = point.getI();
             int y = point.getJ();

@@ -4,6 +4,9 @@ import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
+import java.util.List;
+import java.util.Stack;
+
 public class IterativeDeepening {
     private final char[][] matrix;
 
@@ -11,21 +14,23 @@ public class IterativeDeepening {
         this.matrix = matrix;
     }
 
-    public boolean iterativeDeepening(String word, int i, int j){
+    public Point[] iterativeDeepening(String word, int i, int j){
         if(word.charAt(0) != matrix[i][j])
-            return false;
+            return null;
 
+        final Point[] coordinates = new Point[word.length()];
         final boolean[][] isVisited = new boolean[4][4];
+        final Stack<Point> stack = new Stack<>();
 
-        Point point = new Point(i, j, matrix[i][j], 0);
+        stack.push(new Point(i,j, matrix[i][j], 0));
         isVisited[i][j] = true;
 
-        boolean flag = true;
-        while(flag){
-            flag = false;
+        while(!stack.isEmpty()){
+            final Point point = stack.pop();
             int currentIndex = point.getIndex();
+            coordinates[currentIndex] = new Point(point.getI(), point.getJ());
             if(currentIndex == word.length()-1)
-                return true;
+                return coordinates;
 
             int x = point.getI();
             int y = point.getJ();
@@ -34,12 +39,11 @@ public class IterativeDeepening {
                 int deltaX = x + Direction.DIRECTIONS[k].x();
                 int deltaY = y + Direction.DIRECTIONS[k].y();
                 if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
-                    point = new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex + 1);
+                    stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;
-                    flag = true;
                 }
             }
         }
-        return false;
+        return null;
     }
 }

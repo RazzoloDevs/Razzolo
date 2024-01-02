@@ -36,7 +36,7 @@ public class Trie
                 node = children.get(c);
             else
             {
-                node = new TrieNode(c);
+                node = new TrieNode();
                 children.put(c, node);
             }
 
@@ -101,25 +101,14 @@ public class Trie
 
     private static class TrieNode
     {
-        private char val;
         private HashMap<Character, TrieNode> children = new HashMap<>();
         private boolean isLeaf;
 
         public TrieNode() {}
 
-        public TrieNode(char c)
-        {
-            this.val = c;
-        }
-
         public HashMap<Character, TrieNode> getChildren()
         {
             return this.children;
-        }
-
-        public void setChildren(HashMap<Character, TrieNode> children)
-        {
-            this.children = children;
         }
 
         public boolean isLeaf()

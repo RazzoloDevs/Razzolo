@@ -2,26 +2,22 @@ package main.java.it.razzolodevs.razzolo.model;
 
 public class Point {
 
-    private final int i;
-    private final int j;
-    private final char value;
-    private final int index;
-    private final String string;
+    private int i;
+    private int j;
+    private char value;
+    private int index;
 
     public Point(int i, int j, char value, int index){
         this.i = i;
         this.j = j;
         this.value = value;
         this.index = index;
-        this.string = "";
     }
 
-    public Point(int i, int j, String string, int index){
+    public Point(int i, int j, char c){
         this.i = i;
         this.j = j;
-        this.string = string;
-        this.index = index;
-        this.value = ' ';
+        this.value = c;
     }
 
     public int getI() {
@@ -38,9 +34,5 @@ public class Point {
 
     public int getIndex() {
         return index;
-    }
-
-    public String getString() {
-        return string;
     }
 }

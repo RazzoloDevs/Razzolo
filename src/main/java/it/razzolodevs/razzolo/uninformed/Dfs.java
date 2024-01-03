@@ -25,7 +25,7 @@ public class Dfs {
 
         while(!stack.isEmpty()){
             final ArrayList<Point> pointList = stack.pop();
-            final Point point = pointList.getLast();
+            final Point point = pointList.get(pointList.size()-1);
             final String s = Util.getString(pointList);
             if(dictionary.contains(s))
                 l.put(s, pointList);

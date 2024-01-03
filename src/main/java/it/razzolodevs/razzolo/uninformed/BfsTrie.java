@@ -26,7 +26,7 @@ public class BfsTrie {
 
         while(!queue.isEmpty()){
             final ArrayList<Point> pointList = queue.poll();
-            final Point point = pointList.getLast();
+            final Point point = pointList.get(pointList.size()-1);
             final String s = Util.getString(pointList);
             if(trie.search(s))
                 l.put(s, pointList);

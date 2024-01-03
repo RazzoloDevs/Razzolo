@@ -46,41 +46,28 @@ public class Trie
         node.setLeaf(true);
     }
 
-    public boolean search(String word)
-    {
-        var children = root.getChildren();
-        var node = new TrieNode();
-
-        for (final var c : word.toCharArray())
-        {
-            if (children.containsKey(c))
-            {
-                node = children.get(c);
-                children = node.getChildren();
+    private TrieNode traverse(String str) {
+        TrieNode current = root;
+        for (char c : str.toCharArray()) {
+            if (!current.getChildren().containsKey(c)) {
+                return null;
             }
-            else
-                return false;
+            current = current.getChildren().get(c);
         }
-
-        return node.isLeaf();
+        return current;
     }
 
-    public Set<Character> searchBySubstring(String substring)
-    {
-        var children = root.getChildren();
+    public boolean search(String word) {
+        TrieNode node = traverse(word);
+        return node != null && node.isLeaf();
+    }
 
-        for (final var c : substring.toCharArray())
-        {
-            if (children.containsKey(c))
-            {
-                final var node = children.get(c);
-                children = node.getChildren();
-            }
-            else
-                return null;
+    public Set<Character> searchBySubstring(String substring) {
+        TrieNode node = traverse(substring);
+        if (node == null) {
+            return null;
         }
-
-        return children.keySet();
+        return node.getChildren().keySet();
     }
 
     private void _buildTrie()

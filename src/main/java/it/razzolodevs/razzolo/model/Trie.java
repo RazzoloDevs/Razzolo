@@ -1,8 +1,5 @@
 package main.java.it.razzolodevs.razzolo.model;
 
-import main.java.it.razzolodevs.razzolo.Dictionary;
-
-import java.io.*;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -72,23 +69,14 @@ public class Trie
 
     private void _buildTrie()
     {
-        final RandomAccessFile randomAccessFile = Dictionary.getInstance();
-        final BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(randomAccessFile.getFD()));
-            randomAccessFile.seek(0);
-            while(bufferedReader.ready()){
-                final String s = bufferedReader.readLine();
-                this._insert(s);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        final var hashDictionary = HashDictionary.getInstance();
+        for(final var s : hashDictionary)
+            this._insert(s);
     }
 
     private static class TrieNode
     {
-        private HashMap<Character, TrieNode> children = new HashMap<>();
+        private final HashMap<Character, TrieNode> children = new HashMap<>();
         private boolean isLeaf;
 
         public TrieNode() {}

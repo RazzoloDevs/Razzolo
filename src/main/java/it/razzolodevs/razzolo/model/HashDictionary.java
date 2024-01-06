@@ -19,7 +19,7 @@ public class HashDictionary {
                 hashDictionary.add(s);
             }
         } catch (IOException e) {
-            // gestione delle eccezioni
+            throw new RuntimeException(e);
         }
 
     }

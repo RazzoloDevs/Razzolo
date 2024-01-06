@@ -4,17 +4,12 @@ import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class IterativeDeepening {
-    private final char[][] matrix;
+    private static char[][] matrix;
 
-    public IterativeDeepening(final char[][] matrix){
-        this.matrix = matrix;
-    }
-
-    public Point[] iterativeDeepening(String word, int i, int j){
+    private static Point[] iterativeDeepening(String word, int i, int j){
         if(word.charAt(0) != matrix[i][j])
             return null;
 
@@ -45,5 +40,18 @@ public class IterativeDeepening {
             }
         }
         return null;
+    }
+
+    public static HashMap<String, ArrayList<Point>> run(char[][] m, HashSet<String> dictionary){
+        matrix = m;
+        final var l = new HashMap<String, ArrayList<Point>>();
+        for(final String s : dictionary)
+            for(int i = 0; i < matrix.length; i++)
+                for(int j = 0; j < matrix[i].length; j++){
+                    final var coordinates = iterativeDeepening(s, i, j);
+                    if(coordinates != null)
+                        l.put(s, new ArrayList<>(Arrays.asList(coordinates)));
+                }
+        return l;
     }
 }

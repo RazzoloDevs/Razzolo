@@ -8,15 +8,10 @@ import main.java.it.razzolodevs.razzolo.model.Trie;
 import java.util.*;
 
 public class DfsTrie {
-    private final char[][] matrix;
-    private final Trie trie;
+    private static char[][] matrix;
+    private static Trie trie;
 
-    public DfsTrie(final char[][] matrix, final Trie trie) {
-        this.matrix = matrix;
-        this.trie = trie;
-    }
-
-    public HashMap<String, ArrayList<Point>> dfs(int i, int j){
+    private static HashMap<String, ArrayList<Point>> dfs(int i, int j){
         final var l = new HashMap<String, ArrayList<Point>>();
 
         final var stack = new Stack<ArrayList<Point>>();
@@ -46,6 +41,16 @@ public class DfsTrie {
                 }
             }
         }
+        return l;
+    }
+
+    public static HashMap<String, ArrayList<Point>> run(char[][] m, Trie t){
+        matrix = m;
+        trie = t;
+        final var l = new HashMap<String, ArrayList<Point>>();
+        for(int i = 0; i < matrix.length; i++)
+            for(int j = 0; j < matrix[i].length; j++)
+                l.putAll(dfs(i, j));
         return l;
     }
 }

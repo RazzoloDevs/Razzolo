@@ -8,15 +8,10 @@ import java.util.*;
 
 public class Bfs {
 
-    private final char[][] matrix;
-    private final HashSet<String> dictionary;
+    private static char[][] matrix;
+    private static HashSet<String> dictionary;
 
-    public Bfs(final char[][] matrix, final HashSet<String> dictionary) {
-        this.matrix = matrix;
-        this.dictionary = dictionary;
-    }
-
-    public HashMap<String, ArrayList<Point>> bfs(int i, int j){
+    private static HashMap<String, ArrayList<Point>> bfs(int i, int j){
         final var l = new HashMap<String, ArrayList<Point>>();
 
         final Queue<ArrayList<Point>> queue = new LinkedList<>();
@@ -45,6 +40,16 @@ public class Bfs {
                 }
             }
         }
+        return l;
+    }
+
+    public static HashMap<String, ArrayList<Point>> run(char[][] m, HashSet<String> d){
+        matrix = m;
+        dictionary = d;
+        final var l = new HashMap<String, ArrayList<Point>>();
+        for(int i = 0; i < matrix.length; i++)
+            for(int j = 0; j < matrix[i].length; j++)
+                l.putAll(bfs(i, j));
         return l;
     }
 }

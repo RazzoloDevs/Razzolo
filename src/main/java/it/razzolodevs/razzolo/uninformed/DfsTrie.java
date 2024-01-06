@@ -31,9 +31,9 @@ public class DfsTrie {
 
             final Set<Character> characterSet = trie.searchBySubstring(s);
             // check adjacent cells
-            for(int k = 0; k < Direction.DIRECTIONS.length; k++){
-                int deltaX = x + Direction.DIRECTIONS[k].x();
-                int deltaY = y + Direction.DIRECTIONS[k].y();
+            for(final var direction : Direction.DIRECTIONS){
+                int deltaX = x + direction.x();
+                int deltaY = y + direction.y();
                 if(Util.checkCells(deltaX, deltaY, pointList) && characterSet.contains(matrix[deltaX][deltaY])) {
                     final var tmpList = new ArrayList<>(pointList);
                     tmpList.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY]));

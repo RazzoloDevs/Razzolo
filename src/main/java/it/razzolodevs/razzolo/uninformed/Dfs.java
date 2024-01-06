@@ -29,9 +29,9 @@ public class Dfs {
             int y = point.getJ();
 
             // check adjacent cells
-            for(int k = 0; k < Direction.DIRECTIONS.length; k++){
-                int deltaX = x + Direction.DIRECTIONS[k].x();
-                int deltaY = y + Direction.DIRECTIONS[k].y();
+            for(final var direction : Direction.DIRECTIONS){
+                int deltaX = x + direction.x();
+                int deltaY = y + direction.y();
                 if(Util.checkCells(deltaX, deltaY, pointList)) {
                     final var tmpList = new ArrayList<>(pointList);
                     tmpList.add(new Point(deltaX, deltaY, matrix[deltaX][deltaY]));

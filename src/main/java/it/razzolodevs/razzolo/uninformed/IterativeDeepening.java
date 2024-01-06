@@ -30,9 +30,9 @@ public class IterativeDeepening {
             int x = point.getI();
             int y = point.getJ();
             // check adjacent cells
-            for(int k = 0; k< Direction.DIRECTIONS.length; k++){
-                int deltaX = x + Direction.DIRECTIONS[k].x();
-                int deltaY = y + Direction.DIRECTIONS[k].y();
+            for(final var direction : Direction.DIRECTIONS){
+                int deltaX = x + direction.x();
+                int deltaY = y + direction.y();
                 if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
                     stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
                     isVisited[deltaX][deltaY] = true;

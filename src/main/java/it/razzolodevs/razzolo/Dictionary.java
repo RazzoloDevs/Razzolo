@@ -5,14 +5,20 @@ import java.io.RandomAccessFile;
 
 public class Dictionary
 {
+    private final RandomAccessFile file;
+    private static Dictionary _instance = null;
+    private static final String RESOURCE_DICTIONARY = "dictionary.txt";
+    private static final String FILE_ACCESS_MODE = "r";
+
     private Dictionary()
     {
-        final var url = getClass().getClassLoader().getResource("dictionary.txt");
-        assert url != null;
+        final var url = getClass().getClassLoader().getResource(RESOURCE_DICTIONARY);
+        if (url == null)
+            throw new RuntimeException();
 
         try
         {
-            file = new RandomAccessFile(url.getFile(), "r");
+            this.file = new RandomAccessFile(url.getFile(), FILE_ACCESS_MODE);
         }
         catch (FileNotFoundException e)
         {
@@ -20,12 +26,11 @@ public class Dictionary
         }
     }
 
-    public static RandomAccessFile getInstance()
+    public static RandomAccessFile getFile()
     {
-        if (file == null)
-            new Dictionary();
-        return file;
-    }
+        if (_instance == null)
+            _instance = new Dictionary();
 
-    private static RandomAccessFile file = null;
+        return _instance.file;
+    }
 }

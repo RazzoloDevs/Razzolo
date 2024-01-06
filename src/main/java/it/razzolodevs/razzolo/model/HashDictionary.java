@@ -11,7 +11,7 @@ public class HashDictionary {
     private HashDictionary() {
         hashDictionary = new HashSet<>();
 
-        final RandomAccessFile randomAccessFile = Dictionary.getInstance();
+        final RandomAccessFile randomAccessFile = Dictionary.getFile();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(randomAccessFile.getFD()))) {
             randomAccessFile.seek(0);
             while(bufferedReader.ready()){

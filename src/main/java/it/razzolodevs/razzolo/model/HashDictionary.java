@@ -5,28 +5,40 @@ import main.java.it.razzolodevs.razzolo.Dictionary;
 import java.io.*;
 import java.util.HashSet;
 
-public class HashDictionary {
-    private static HashSet<String> hashDictionary;
+public class HashDictionary
+{
+    private final HashSet<String> set;
+    private static HashDictionary _instance;
 
-    private HashDictionary() {
-        hashDictionary = new HashSet<>();
+    private HashDictionary()
+    {
+        this.set = new HashSet<>();
 
-        final RandomAccessFile randomAccessFile = Dictionary.getFile();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(randomAccessFile.getFD()))) {
-            randomAccessFile.seek(0);
-            while(bufferedReader.ready()){
-                final String s = bufferedReader.readLine();
-                hashDictionary.add(s);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        populateSet();
     }
 
-    public static HashSet<String> getInstance() {
-        if(hashDictionary == null)
-            new HashDictionary();
-        return hashDictionary;
+    private void populateSet()
+    {
+        final var file = Dictionary.getFile();
+
+        try (final var bufferedReader = new BufferedReader(new FileReader(file.getFD())))
+        {
+            file.seek(0);
+
+            while (bufferedReader.ready())
+                this.set.add(bufferedReader.readLine());
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static HashSet<String> getSet()
+    {
+        if (_instance == null)
+            _instance = new HashDictionary();
+
+        return _instance.set;
     }
 }

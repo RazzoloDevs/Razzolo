@@ -11,7 +11,7 @@ public class RandomMatrixTest extends Configuration{
     protected static void beforeAllTest() {
         randomMatrix();
         printMatrix();
-        dictionary = HashDictionary.getInstance();
+        dictionary = HashDictionary.getSet();
         trie = Trie.getInstance();
     }
 

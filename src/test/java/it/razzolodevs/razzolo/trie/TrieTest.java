@@ -21,7 +21,7 @@ public class TrieTest{
 
         boolean flag = true;
         int count = 0;
-        final HashSet<String> hashDictionary = HashDictionary.getInstance();
+        final HashSet<String> hashDictionary = HashDictionary.getSet();
         for(String s : hashDictionary){
             if(trie.search(s))
                 count++;

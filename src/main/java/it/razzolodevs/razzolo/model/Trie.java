@@ -69,7 +69,7 @@ public class Trie
 
     private void _buildTrie()
     {
-        final var hashDictionary = HashDictionary.getInstance();
+        final var hashDictionary = HashDictionary.getSet();
         for(final var s : hashDictionary)
             this._insert(s);
     }

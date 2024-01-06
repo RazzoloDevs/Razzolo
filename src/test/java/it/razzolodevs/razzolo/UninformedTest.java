@@ -10,7 +10,7 @@ public class UninformedTest extends Configuration {
     @BeforeAll
     protected static void beforeAllTest() {
         printMatrix();
-        dictionary = HashDictionary.getInstance();
+        dictionary = HashDictionary.getSet();
         trie = Trie.getInstance();
     }
 

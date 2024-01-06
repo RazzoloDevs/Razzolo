@@ -1,5 +1,7 @@
 package main.java.it.razzolodevs.razzolo.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import main.java.it.razzolodevs.razzolo.dictionary.HashDictionary;
 
 import java.util.HashMap;
@@ -7,6 +9,14 @@ import java.util.Set;
 
 public class Trie
 {
+    @Getter
+    private static class TrieNode
+    {
+        private final HashMap<Character, TrieNode> children = new HashMap<>();
+        @Setter
+        private boolean isLeaf;
+    }
+
     private final TrieNode root;
     private static Trie _instance = null;
 
@@ -82,29 +92,5 @@ public class Trie
             return null;
 
         return node.getChildren().keySet();
-    }
-
-    private static class TrieNode
-    {
-        private final HashMap<Character, TrieNode> children = new HashMap<>();
-        private boolean isLeaf;
-
-        public TrieNode() {}
-
-        public HashMap<Character, TrieNode> getChildren()
-        {
-            return this.children;
-        }
-
-        public boolean isLeaf()
-        {
-            return this.isLeaf;
-        }
-
-        public void setLeaf(boolean isLeaf)
-        {
-            this.isLeaf = isLeaf;
-        }
-
     }
 }

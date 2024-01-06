@@ -1,6 +1,4 @@
-package main.java.it.razzolodevs.razzolo.model;
-
-import main.java.it.razzolodevs.razzolo.Dictionary;
+package main.java.it.razzolodevs.razzolo.dictionary;
 
 import java.io.*;
 import java.util.HashSet;

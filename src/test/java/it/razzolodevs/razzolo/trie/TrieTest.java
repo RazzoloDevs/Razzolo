@@ -1,6 +1,6 @@
 package test.java.it.razzolodevs.razzolo.trie;
 
-import main.java.it.razzolodevs.razzolo.model.HashDictionary;
+import main.java.it.razzolodevs.razzolo.dictionary.HashDictionary;
 import main.java.it.razzolodevs.razzolo.model.Trie;
 import org.junit.jupiter.api.*;
 

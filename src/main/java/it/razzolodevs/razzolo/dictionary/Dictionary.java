@@ -1,4 +1,4 @@
-package main.java.it.razzolodevs.razzolo;
+package main.java.it.razzolodevs.razzolo.dictionary;
 
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;

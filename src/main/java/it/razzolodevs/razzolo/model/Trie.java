@@ -1,12 +1,14 @@
 package main.java.it.razzolodevs.razzolo.model;
 
+import main.java.it.razzolodevs.razzolo.dictionary.HashDictionary;
+
 import java.util.HashMap;
 import java.util.Set;
 
 public class Trie
 {
     private final TrieNode root;
-    private static Trie trie;
+    private static Trie _instance = null;
 
     private Trie()
     {
@@ -17,9 +19,16 @@ public class Trie
 
     public static Trie getInstance()
     {
-        if(trie == null)
-            trie = new Trie();
-        return trie;
+        if (_instance == null)
+            _instance = new Trie();
+
+        return _instance;
+    }
+
+    private void _buildTrie()
+    {
+        for (final var s : HashDictionary.getSet())
+            _insert(s);
     }
 
     private void _insert(String word)
@@ -43,35 +52,36 @@ public class Trie
         node.setLeaf(true);
     }
 
-    private TrieNode traverse(String str) {
-        TrieNode current = root;
-        for (char c : str.toCharArray()) {
-            if (!current.getChildren().containsKey(c)) {
+    private TrieNode traverse(String str)
+    {
+        var current = root;
+
+        for (final var c : str.toCharArray())
+        {
+            if (!current.getChildren().containsKey(c))
                 return null;
-            }
+
             current = current.getChildren().get(c);
         }
+
         return current;
     }
 
-    public boolean search(String word) {
-        TrieNode node = traverse(word);
+    public boolean search(String word)
+    {
+        final var node = traverse(word);
+
         return node != null && node.isLeaf();
     }
 
-    public Set<Character> searchBySubstring(String substring) {
-        TrieNode node = traverse(substring);
-        if (node == null) {
-            return null;
-        }
-        return node.getChildren().keySet();
-    }
-
-    private void _buildTrie()
+    public Set<Character> searchBySubstring(String substring)
     {
-        final var hashDictionary = HashDictionary.getSet();
-        for(final var s : hashDictionary)
-            this._insert(s);
+        final var node = traverse(substring);
+
+        if (node == null)
+            return null;
+
+        return node.getChildren().keySet();
     }
 
     private static class TrieNode

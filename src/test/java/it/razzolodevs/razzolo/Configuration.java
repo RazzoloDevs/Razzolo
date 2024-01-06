@@ -1,31 +1,50 @@
 package test.java.it.razzolodevs.razzolo;
 
-import org.junit.jupiter.api.AfterEach;
+import main.java.it.razzolodevs.razzolo.model.Point;
+import main.java.it.razzolodevs.razzolo.model.Trie;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Configuration {
-    protected final char[][] matrix = {
+    protected static final int SIZE = 4;
+    protected static char[][] matrix = {
             {'A', 'B', 'C', 'D'},
             {'E', 'F', 'G', 'H'},
             {'I', 'L', 'M', 'N'},
             {'O', 'P', 'Q', 'R'}
     };
 
-    protected Set<String> foundWords;
-    protected final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA", "AFELIO", "FELPI", "FELPO", "POLI", "LEI", "FLIP", "FLOP"));
+    protected HashMap<String, ArrayList<Point>> foundWords;
+    protected final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA", "AFELIO", "FELPI", "FELPO", "POLI", "LEI", "FLIP", "FLOP"));   // vocaboli che devono essere trovati dall'algoritmo
+    protected static HashSet<String> dictionary;
+    protected static Trie trie;
     protected long start;
 
-    @AfterEach
+    protected static void randomMatrix(){
+        matrix = new char[SIZE][SIZE];
+        Random random = new Random();
+        char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'Z'};
+
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                int randomIndex = random.nextInt(alphabet.length);
+                matrix[i][j] = alphabet[randomIndex];
+            }
+        }
+    }
+
+    protected static void printMatrix(){
+        for (char[] chars : matrix) {
+            for (char c : chars)
+                System.out.print(c + " ");
+            System.out.println();
+        }
+    }
+
     protected void teardown() {
         final var end = System.nanoTime();
-        System.out.format("Found words: %s\n", foundWords);
-        System.out.format("Number of words: %d\n", foundWords.size());
+        System.out.format("Found words: %s\n", foundWords.keySet());
+        System.out.format("Number of words: %d\n", foundWords.keySet().size());
         System.out.format("Elapsed time: %g s\n", ((double)(end-start))/1000000000);
-        for(String s : trueWords)
-            if(!foundWords.contains(s))
-                System.out.format("%s not found\n",s);
     }
 }

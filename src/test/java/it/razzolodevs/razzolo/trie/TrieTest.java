@@ -1,13 +1,21 @@
 package test.java.it.razzolodevs.razzolo.trie;
 
 import main.java.it.razzolodevs.razzolo.model.HashDictionary;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import main.java.it.razzolodevs.razzolo.model.Trie;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class TrieTest extends TrieConfiguration{
+public class TrieTest{
+
+    private static Trie trie;
+
+    @BeforeAll
+    protected static void beforeAll() {
+        trie = Trie.getInstance();
+    }
+
     @Test
     public void buildTrie(){
 

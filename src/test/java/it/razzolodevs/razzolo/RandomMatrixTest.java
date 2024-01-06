@@ -5,10 +5,11 @@ import main.java.it.razzolodevs.razzolo.model.Trie;
 import main.java.it.razzolodevs.razzolo.uninformed.*;
 import org.junit.jupiter.api.*;
 
-public class UninformedTest extends Configuration {
+public class RandomMatrixTest extends Configuration{
 
     @BeforeAll
     protected static void beforeAllTest() {
+        randomMatrix();
         printMatrix();
         dictionary = HashDictionary.getInstance();
         trie = Trie.getInstance();
@@ -22,9 +23,6 @@ public class UninformedTest extends Configuration {
     @AfterEach
     protected void teardown() {
         super.teardown();
-        for(String s : trueWords)
-            if(!foundWords.containsKey(s))
-                System.out.println("Word not found: " + s);
     }
 
     @AfterAll

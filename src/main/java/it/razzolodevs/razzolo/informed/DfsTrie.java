@@ -1,11 +1,14 @@
-package main.java.it.razzolodevs.razzolo.uninformed;
+package main.java.it.razzolodevs.razzolo.informed;
 
 import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;
 import main.java.it.razzolodevs.razzolo.model.Point;
 import main.java.it.razzolodevs.razzolo.model.Trie;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Stack;
 
 public class DfsTrie {
     private static char[][] matrix;

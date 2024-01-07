@@ -1,4 +1,4 @@
-package main.java.it.razzolodevs.razzolo.uninformed;
+package main.java.it.razzolodevs.razzolo.informed;
 
 import main.java.it.razzolodevs.razzolo.Util;
 import main.java.it.razzolodevs.razzolo.model.Direction;

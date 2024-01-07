@@ -1,6 +1,8 @@
 package test.java.it.razzolodevs.razzolo;
 
 import main.java.it.razzolodevs.razzolo.dictionary.HashDictionary;
+import main.java.it.razzolodevs.razzolo.informed.BfsTrie;
+import main.java.it.razzolodevs.razzolo.informed.DfsTrie;
 import main.java.it.razzolodevs.razzolo.model.Trie;
 import main.java.it.razzolodevs.razzolo.uninformed.*;
 import org.junit.jupiter.api.*;

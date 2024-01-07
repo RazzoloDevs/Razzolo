@@ -14,6 +14,7 @@ public abstract class Configuration {
             {'O', 'P', 'Q', 'R'}
     };
 
+    protected static char[][] rMatrix;
     protected HashMap<String, ArrayList<Point>> foundWords;
     protected final Set<String> trueWords = new HashSet<>(Arrays.asList("GLEBA", "AFELIO", "FELPI", "FELPO", "POLI", "LEI", "FLIP", "FLOP"));   // vocaboli che devono essere trovati dall'algoritmo
     protected static HashSet<String> dictionary;
@@ -21,19 +22,19 @@ public abstract class Configuration {
     protected long start;
 
     protected static void randomMatrix(){
-        matrix = new char[SIZE][SIZE];
+        rMatrix = new char[SIZE][SIZE];
         Random random = new Random();
         char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'Z'};
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 int randomIndex = random.nextInt(alphabet.length);
-                matrix[i][j] = alphabet[randomIndex];
+                rMatrix[i][j] = alphabet[randomIndex];
             }
         }
     }
 
-    protected static void printMatrix(){
+    protected static void printMatrix(char[][] matrix){
         for (char[] chars : matrix) {
             for (char c : chars)
                 System.out.print(c + " ");

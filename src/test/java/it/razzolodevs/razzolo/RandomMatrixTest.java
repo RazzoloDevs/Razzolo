@@ -10,7 +10,7 @@ public class RandomMatrixTest extends Configuration{
     @BeforeAll
     protected static void beforeAllTest() {
         randomMatrix();
-        printMatrix();
+        printMatrix(rMatrix);
         dictionary = HashDictionary.getSet();
         trie = Trie.getInstance();
     }
@@ -32,30 +32,30 @@ public class RandomMatrixTest extends Configuration{
     @Test
     public void bfsTest() {
         System.out.println("Bfs:");
-        foundWords = Bfs.run(matrix, dictionary);
+        foundWords = Bfs.run(rMatrix, dictionary);
     }
 
     @Test
     public void dfsTest() {
         System.out.println("Dfs:");
-        foundWords = Dfs.run(matrix, dictionary);
+        foundWords = Dfs.run(rMatrix, dictionary);
     }
 
     @Test
     public void IterativeDeepening() {
         System.out.println("Iterative Deepening:");
-        foundWords = IterativeDeepening.run(matrix, dictionary);
+        foundWords = IterativeDeepening.run(rMatrix, dictionary);
     }
 
     @Test
     public void bfsTrieTest() {
         System.out.println("Bfs Trie:");
-        foundWords = BfsTrie.run(matrix, trie);
+        foundWords = BfsTrie.run(rMatrix, trie);
     }
 
     @Test
     public void dfsTrieTest() {
         System.out.println("Dfs Trie:");
-        foundWords = DfsTrie.run(matrix, trie);
+        foundWords = DfsTrie.run(rMatrix, trie);
     }
 }

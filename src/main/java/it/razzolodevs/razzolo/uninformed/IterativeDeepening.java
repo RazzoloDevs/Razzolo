@@ -9,49 +9,59 @@ import java.util.*;
 public class IterativeDeepening {
     private static char[][] matrix;
 
-    private static Point[] iterativeDeepening(String word, int i, int j){
-        if(word.charAt(0) != matrix[i][j])
+    private static List<Point> iterativeDeepening(String word, int i, int j) {
+        if (word.charAt(0) != matrix[i][j])
             return null;
 
-        final Point[] coordinates = new Point[word.length()];
-        final boolean[][] isVisited = new boolean[4][4];
-        final Stack<Point> stack = new Stack<>();
+        List<Point> path = new ArrayList<>();
+        path.add(new Point(i, j, matrix[i][j]));
 
-        stack.push(new Point(i,j, matrix[i][j], 0));
-        isVisited[i][j] = true;
+        if (deepen(word, path, 1))
+            return path;
+        else
+            return null;
+    }
 
-        while(!stack.isEmpty()){
-            final Point point = stack.pop();
-            int currentIndex = point.getIndex();
-            coordinates[currentIndex] = new Point(point.getI(), point.getJ());
-            if(currentIndex == word.length()-1)
-                return coordinates;
+    //recursive algorithm
+    private static boolean deepen(String word, List<Point> path, int index) {
 
-            int x = point.getI();
-            int y = point.getJ();
-            // check adjacent cells
-            for(final var direction : Direction.DIRECTIONS){
-                int deltaX = x + direction.x();
-                int deltaY = y + direction.y();
-                if(Util.checkCells(isVisited, deltaX, deltaY) && matrix[deltaX][deltaY] == word.charAt(currentIndex+1)){
-                    stack.push(new Point(deltaX, deltaY, matrix[deltaX][deltaY], currentIndex+1));
-                    isVisited[deltaX][deltaY] = true;
+        //base case
+        if (index == word.length()) {
+            return true;
+        }
+
+        Point lastPoint = path.getLast();
+        int x = lastPoint.getI();
+        int y = lastPoint.getJ();
+
+        for (Direction direction : Direction.DIRECTIONS) {
+            int newX = x + direction.x();
+            int newY = y + direction.y();
+
+            if (Util.isValid(newX, newY, word.charAt(index), path, matrix)) {
+                path.add(new Point(newX, newY, matrix[newX][newY]));
+                if (deepen(word, path, index + 1)) {
+                    return true;
                 }
+                path.removeLast();
             }
         }
-        return null;
+
+        return false;
     }
 
     public static HashMap<String, ArrayList<Point>> run(char[][] m, HashSet<String> dictionary){
         matrix = m;
-        final var l = new HashMap<String, ArrayList<Point>>();
-        for(final String s : dictionary)
+        final var foundWords = new HashMap<String, ArrayList<Point>>();
+        for(final String word : dictionary)
             for(int i = 0; i < matrix.length; i++)
                 for(int j = 0; j < matrix[i].length; j++){
-                    final var coordinates = iterativeDeepening(s, i, j);
-                    if(coordinates != null)
-                        l.put(s, new ArrayList<>(Arrays.asList(coordinates)));
+                    final var result = iterativeDeepening(word, i, j);
+                    if(result != null) {
+                        foundWords.put(word, new ArrayList<>(result));
+                        break;
+                    }
                 }
-        return l;
+        return foundWords;
     }
 }

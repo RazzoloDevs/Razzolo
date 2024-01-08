@@ -3,6 +3,7 @@ package main.java.it.razzolodevs.razzolo;
 import main.java.it.razzolodevs.razzolo.model.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
     // controlla che una coordinata sia valida
@@ -11,8 +12,19 @@ public class Util {
     }
 
     // controlla che una coordinata sia valida e che non sia già stata visitata
-    public static boolean checkCells(boolean[][] isVisited, int i, int j){
-        return checkCells(i, j) && !isVisited[i][j];
+    public static boolean isValid(int x, int y, char targetChar, List<Point> path, char[][] matrix){
+        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length) {
+            return false;
+        }
+        if (matrix[x][y] != targetChar) {
+            return false;
+        }
+        for (Point point : path) {
+            if (point.getI() == x && point.getJ() == y) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // controlla che una coordinata sia valida e che non sia già stata visitata

@@ -16,10 +16,7 @@ public class IterativeDeepening {
         List<Point> path = new ArrayList<>();
         path.add(new Point(i, j, matrix[i][j]));
 
-        if (deepen(word, path, 1))
-            return path;
-        else
-            return null;
+        return deepen(word, path, 1) ? path : null;
     }
 
     //recursive algorithm
@@ -40,9 +37,9 @@ public class IterativeDeepening {
 
             if (Util.isValid(newX, newY, word.charAt(index), path, matrix)) {
                 path.add(new Point(newX, newY, matrix[newX][newY]));
-                if (deepen(word, path, index + 1)) {
+                if (deepen(word, path, index + 1))
                     return true;
-                }
+
                 path.removeLast();
             }
         }
@@ -53,15 +50,18 @@ public class IterativeDeepening {
     public static HashMap<String, ArrayList<Point>> run(char[][] m, HashSet<String> dictionary){
         matrix = m;
         final var foundWords = new HashMap<String, ArrayList<Point>>();
-        for(final String word : dictionary)
-            for(int i = 0; i < matrix.length; i++)
-                for(int j = 0; j < matrix[i].length; j++){
+        for(final String word : dictionary) {
+            boolean wordIsFound = false;
+            for (int i = 0; i < matrix.length && !wordIsFound; i++) {
+                for (int j = 0; j < matrix[i].length && !wordIsFound; j++) {
                     final var result = iterativeDeepening(word, i, j);
-                    if(result != null) {
+                    if (result != null) {
                         foundWords.put(word, new ArrayList<>(result));
-                        break;
+                        wordIsFound = true;
                     }
                 }
+            }
+        }
         return foundWords;
     }
 }

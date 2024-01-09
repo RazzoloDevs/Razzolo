@@ -13,17 +13,16 @@ public class Util {
 
     // controlla che una coordinata sia valida e che non sia già stata visitata
     public static boolean isValid(int x, int y, char targetChar, List<Point> path, char[][] matrix){
-        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length) {
+        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length)
             return false;
-        }
-        if (matrix[x][y] != targetChar) {
+
+        if (matrix[x][y] != targetChar)
             return false;
-        }
-        for (Point point : path) {
-            if (point.getI() == x && point.getJ() == y) {
+
+        for (Point point : path)
+            if (point.getI() == x && point.getJ() == y)
                 return false;
-            }
-        }
+
         return true;
     }
 
